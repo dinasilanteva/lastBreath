@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.button {
+  background-color: #fff;
+  border: none;
+  color: white;
+  padding: 0px 0px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="audioplayer" > <!-- Remove the "Controls" Attribute if you don't want the visual controls -->
+</audio>
+
+<div>
+    <button class="button" onclick="document.getElementById('audioplayer').play()">
+    <img src="https://icons.iconarchive.com/icons/icons8/ios7/256/Media-Controls-Play-icon.png"/>
+    </button>
+
+    <button class="button" onclick="document.getElementById('audioplayer').pause()">
+    <img src="https://icons.iconarchive.com/icons/icons8/ios7/256/Media-Controls-Pause-icon.png"/>
+
+    </button>
+
+   
+</div> 
+
+<script>
+    var lastSong = null;
+    var selection = null;
+    var player = document.getElementById("audioplayer"); // Get Audio Element
+    player.autoplay=true;
+    player.addEventListener("ended", selectRandom); // Run function when song ends
+
+    function selectRandom(){
+        while(selection == lastSong){ // Repeat until different song is selected
+            selection = Math.floor(Math.random() * 1358);
+        }
+        lastSong = selection; // Remember last song
+        player.src = `sounds/${selection+1}.mp3`; // Tell HTML the location of the new Song
+
+    }
+
+    selectRandom(); // Select initial song
+    player.play(); // Start Song
+</script>
+
+</body>
+</html>
